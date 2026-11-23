@@ -4,9 +4,9 @@
 # Native grid meter profiles
 
 In DISPATCH/01 firmware with native SunSpec and Solarman support, open
-**Energy → Connect or verify a whole-site meter** and choose **Load meter
-profile**. The profile fills the form. Enter the local device address and
-serial, review the settings, and save. DISPATCH polls the meter or logger
+**Settings → Energy sources → Connect or verify a whole-site meter** and
+choose **Load meter profile**. The profile fills the form. Enter the local
+device address and serial, review the settings, and save. DISPATCH polls the meter or logger
 directly from the Atom.
 
 | Profile | Starting values |
