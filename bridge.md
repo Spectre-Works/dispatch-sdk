@@ -43,9 +43,6 @@ a single controller to each writable device. To move an existing device to
 a bridge, replace its native binding, then verify that DISPATCH can observe
 the selected entity in Preview.
 
-The [grid meter bridge](grid-bridge.md) is available for earlier firmware.
-Controllers with native grid meter support use [native profiles](native-grid.md).
-
 ## Solar production
 
 Pass a `solar` callback to `Bridge` for a gateway that measures generation.

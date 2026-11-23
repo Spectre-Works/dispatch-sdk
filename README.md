@@ -42,8 +42,6 @@ python3 -m examples.demo_bridge --token-file bridge-token
 Use `--bind` with a trusted LAN IPv4 address to connect a controller during
 development. Register your own device callbacks with `dispatch_sdk.bridge.Bridge`.
 
-Earlier firmware can use the optional [grid meter bridge](grid-bridge.md).
-
 ## License
 
 Copyright 2026 SPECTRE WORKS LLC. The SDK is available under the
