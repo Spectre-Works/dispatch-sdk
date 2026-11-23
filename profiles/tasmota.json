@@ -3,6 +3,7 @@
   "family": "tasmota",
   "fields": {
     "watts": "Power",
-    "kilowattHours": "Total"
+    "kilowattHours": "Total",
+    "statusRelay": "auto"
   }
 }

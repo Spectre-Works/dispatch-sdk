@@ -77,7 +77,8 @@
             "relayEnergyObject",
             "relayWattHours",
             "singleGridWatts",
-            "threeGridWatts"
+            "threeGridWatts",
+            "models"
           ],
           "properties": {
             "relayWatts": {
@@ -99,6 +100,38 @@
             "threeGridWatts": {
               "type": "string",
               "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            },
+            "models": {
+              "type": "array",
+              "maxItems": 4,
+              "items": {
+                "type": "array",
+                "minItems": 4,
+                "maxItems": 4,
+                "prefixItems": [
+                  {
+                    "type": "string",
+                    "pattern": "^shelly[a-z0-9-]{1,16}-$"
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 199
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 199
+                  },
+                  {
+                    "enum": [
+                      "none",
+                      "em",
+                      "em1"
+                    ]
+                  }
+                ]
+              }
             }
           },
           "additionalProperties": false
@@ -125,7 +158,8 @@
           "type": "object",
           "required": [
             "watts",
-            "kilowattHours"
+            "kilowattHours",
+            "statusRelay"
           ],
           "properties": {
             "watts": {
@@ -135,6 +169,13 @@
             "kilowattHours": {
               "type": "string",
               "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            },
+            "statusRelay": {
+              "enum": [
+                "auto",
+                "indexed",
+                "single"
+              ]
             }
           },
           "additionalProperties": false
@@ -288,7 +329,11 @@
           "required": [
             "battery",
             "temperature",
-            "actuator"
+            "actuator",
+            "outlet",
+            "grid",
+            "outletWatts",
+            "outletEnergy"
           ],
           "properties": {
             "battery": {
@@ -321,6 +366,50 @@
                 {
                   "type": "string",
                   "pattern": "^(?:number|select|button)\\.[a-z0-9_]{1,31}$"
+                }
+              ]
+            },
+            "outlet": {
+              "anyOf": [
+                {
+                  "const": ""
+                },
+                {
+                  "type": "string",
+                  "pattern": "^switch\\.[a-z0-9_]{1,31}$"
+                }
+              ]
+            },
+            "grid": {
+              "anyOf": [
+                {
+                  "const": ""
+                },
+                {
+                  "type": "string",
+                  "pattern": "^sensor\\.[a-z0-9_]{1,31}$"
+                }
+              ]
+            },
+            "outletWatts": {
+              "anyOf": [
+                {
+                  "const": ""
+                },
+                {
+                  "type": "string",
+                  "pattern": "^sensor\\.[a-z0-9_]{1,31}$"
+                }
+              ]
+            },
+            "outletEnergy": {
+              "anyOf": [
+                {
+                  "const": ""
+                },
+                {
+                  "type": "string",
+                  "pattern": "^sensor\\.[a-z0-9_]{1,31}$"
                 }
               ]
             }

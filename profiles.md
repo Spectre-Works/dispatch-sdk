@@ -17,12 +17,12 @@ profile. Keep the file you uploaded if you want to reinstall that revision.
 | Family | Editable mapping |
 | --- | --- |
 | `shelly-gen1` | Seven stock model identities and up to four additive entries. Each new entry supplies the reported model, unique device ID prefix, and relay count from 1 through 4. The native Gen1 status, metering units, and relay protocol apply. |
-| `shelly-rpc` | Switch watts and watt-hours fields, and the signed watts fields for EM1 and EM components. Identity, component validity, and relay command handling belong to the controller. |
-| `tasmota` | Scalar watts and cumulative kilowatt-hours keys inside `StatusSNS.ENERGY` on single-output meters. The same mapping serves HTTP and MQTT. |
+| `shelly-rpc` | Switch watts and watt-hours fields, signed watts fields for EM1 and EM, and up to four additional model prefixes with Switch component ranges and an optional EM0 or EM1 metering path. Use the row format `[prefix, firstSwitch, lastSwitch, meter]` with meter `none`, `em` or `em1`. |
+| `tasmota` | Scalar watts and cumulative kilowatt-hours keys inside `StatusSNS.ENERGY` on single-output meters. Choose `auto` for native relay status detection, `indexed` for `POWERn`, or `single` for unindexed `POWER`. The same mapping serves HTTP and MQTT. |
 | `victron-grid` | First system-unit grid register and 32-bit word order. Each commissioned phase occupies two consecutive words and supplies signed whole watts. ESS target reads and writes use the stock register map. |
 | `fronius` | Signed grid watts and PV watts fields inside the Power Flow site object. Grid-point and backup checks still apply. |
 | `cgminer` | Summary field names for MH/s over 5 seconds, 20 seconds, and lifetime average, plus the accepted-share count and elapsed seconds. |
-| `home-assistant` | Optional battery sensor, temperature sensor, and number, select, or restart button entity IDs. Select **Fill from SDK template** in the Home Assistant setup to review them before saving. |
+| `home-assistant` | Optional battery and temperature sensors, number/select/restart action, grid power sensor, outlet switch, and outlet power and energy sensors. Use **Fill from SDK template** in the relevant setup form and review the entities before saving. |
 
 Field names are literal, case-sensitive keys. Supply the documented units and
 the same physical meaning as the corresponding stock key. Use distinct

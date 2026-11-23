@@ -6,6 +6,7 @@
     "relayEnergyObject": "aenergy",
     "relayWattHours": "total",
     "singleGridWatts": "act_power",
-    "threeGridWatts": "total_act_power"
+    "threeGridWatts": "total_act_power",
+    "models": []
   }
 }

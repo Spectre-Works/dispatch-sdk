@@ -4,6 +4,10 @@
   "fields": {
     "battery": "",
     "temperature": "",
-    "actuator": ""
+    "actuator": "",
+    "outlet": "",
+    "grid": "",
+    "outletWatts": "",
+    "outletEnergy": ""
   }
 }
