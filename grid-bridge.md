@@ -1,7 +1,10 @@
 <!-- SPDX-FileCopyrightText: 2026 SPECTRE WORKS LLC -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
-# Bridge a whole-site grid meter
+# Grid meter bridge for earlier firmware
+
+Controllers with native SunSpec and Solarman drivers use the
+[native grid meter profiles](native-grid.md).
 
 Run this bridge on a LAN machine that can reach the controller and the
 meter or gateway. The bridge reads power from the equipment and serves

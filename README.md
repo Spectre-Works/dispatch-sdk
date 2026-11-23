@@ -21,6 +21,12 @@ page shows the active and saved mappings and lets you restore the stock profile.
 Check readings in Preview and reverify grid direction if prompted before
 resuming operation.
 
+## Native grid meters
+
+Use the [native grid meter profiles](native-grid.md) to configure SunSpec
+Modbus TCP, a SolarEdge attached meter, or Solarman V5 directly on a
+DISPATCH controller whose firmware supports those protocols.
+
 ## LAN bridge
 
 Use the [bridge interface](bridge.md) for a custom protocol with code that runs
@@ -36,9 +42,7 @@ python3 -m examples.demo_bridge --token-file bridge-token
 Use `--bind` with a trusted LAN IPv4 address to connect a controller during
 development. Register your own device callbacks with `dispatch_sdk.bridge.Bridge`.
 
-Use the [grid meter bridge](grid-bridge.md) for SunSpec Modbus TCP meters,
-SolarEdge import/export meters, and Solarman V5 logger setups with a
-documented inverter register map.
+Earlier firmware can use the optional [grid meter bridge](grid-bridge.md).
 
 ## License
 

@@ -1,0 +1,11 @@
+{
+  "format": "dispatch-grid-meter",
+  "version": 1,
+  "source": "solarman-v5",
+  "port": 8899,
+  "unit": 1,
+  "address": null,
+  "function": 3,
+  "exponent": 0,
+  "reverse": false
+}

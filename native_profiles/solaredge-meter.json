@@ -1,0 +1,11 @@
+{
+  "format": "dispatch-grid-meter",
+  "version": 1,
+  "source": "sunspec",
+  "port": 1502,
+  "unit": 1,
+  "address": 40000,
+  "model": 203,
+  "meterIndex": 1,
+  "reverse": false
+}

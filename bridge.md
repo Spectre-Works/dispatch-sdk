@@ -43,9 +43,8 @@ a single controller to each writable device. To move an existing device to
 a bridge, replace its native binding, then verify that DISPATCH can observe
 the selected entity in Preview.
 
-[Grid meter profiles](grid-bridge.md) provide ready-to-configure drivers for
-SunSpec and Solarman V5. They serve a signed power sensor for the controller's
-whole-site meter setting.
+The [grid meter bridge](grid-bridge.md) is available for earlier firmware.
+Controllers with native grid meter support use [native profiles](native-grid.md).
 
 ## Solar production
 
