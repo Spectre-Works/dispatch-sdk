@@ -39,6 +39,37 @@ class Entity:
     write: Callable[[bool | float | str | None], None] | None = None
 
 
+@dataclass(frozen=True)
+class SolarReading:
+    """A fresh generation observation from a bound inverter or gateway."""
+
+    gateway_id: str
+    age_seconds: int
+    watts: int
+    today_centi_kwh: int
+    lifetime_deci_kwh: int
+    inverter_count: int
+    online_inverters: int
+
+    def payload(self):
+        if not isinstance(self.gateway_id, str) or not re.fullmatch(r"[0-9]{12}", self.gateway_id):
+            raise ValueError("Solar gateway IDs contain exactly 12 digits.")
+        readings = {
+            "ageSeconds": (self.age_seconds, 30),
+            "watts": (self.watts, 1_000_000),
+            "todayCentiKWh": (self.today_centi_kwh, 2**32 - 1),
+            "lifetimeDeciKWh": (self.lifetime_deci_kwh, 2**32 - 1),
+            "inverterCount": (self.inverter_count, 2**16 - 1),
+            "onlineInverters": (self.online_inverters, 2**16 - 1),
+        }
+        if any(type(value) is not int or not 0 <= value <= maximum for value, maximum in readings.values()):
+            raise ValueError("Solar readings must be current and within range.")
+        if self.online_inverters > self.inverter_count:
+            raise ValueError("Online inverter count exceeds the installed count.")
+        return {"version": VERSION, "id": self.gateway_id,
+                **{key: value for key, (value, _) in readings.items()}}
+
+
 def _unique_object(pairs):
     result = {}
     for key, value in pairs:
@@ -77,17 +108,19 @@ class Bridge(HTTPServer):
 
     allow_reuse_address = True
 
-    def __init__(self, address: tuple[str, int], token: str, entities: dict[str, Entity]):
+    def __init__(self, address: tuple[str, int], token: str, entities: dict[str, Entity],
+                 *, solar: Callable[[], SolarReading | None] | None = None):
         if not TOKEN.fullmatch(token):
             raise ValueError("Set a 32–255 character bearer token.")
-        if not 1 <= len(entities) <= 32:
-            raise ValueError("Register 1–32 entities.")
+        if len(entities) > 32 or (not entities and solar is None):
+            raise ValueError("Register up to 32 entities and at least one data source.")
         if any(not ENTITY_ID.fullmatch(name) or len(name) > 80 for name in entities):
             raise ValueError("Invalid entity ID.")
         if any(name.startswith("sensor.") and entity.write for name, entity in entities.items()):
             raise ValueError("Sensor entities are read-only.")
         self.authorization = ("Bearer " + token).encode("ascii")
         self.entities = dict(entities)
+        self.solar = solar
         super().__init__(address, _Handler)
 
 
@@ -126,7 +159,22 @@ class _Handler(BaseHTTPRequestHandler):
         if not self._authorized():
             return
         if self.path == "/api/dispatch/v1/capabilities":
-            self._reply(200, {"version": VERSION, "transport": "ha-rest", "entities": list(self.server.entities)})
+            self._reply(200, {"version": VERSION, "transport": "ha-rest", "entities": list(self.server.entities),
+                              "solar": self.server.solar is not None})
+            return
+        if self.path == "/api/dispatch/v1/solar":
+            if self.server.solar is None:
+                self._reply(404, {"error": "Solar source is not configured"})
+                return
+            try:
+                reading = self.server.solar()
+                if not isinstance(reading, SolarReading):
+                    raise ValueError("Missing reading.")
+                payload = reading.payload()
+            except Exception:
+                self._reply(503, {"error": "Solar reading unavailable"})
+                return
+            self._reply(200, payload)
             return
         prefix = "/api/states/"
         entity_id = self.path.removeprefix(prefix)

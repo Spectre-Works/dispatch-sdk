@@ -6,10 +6,20 @@ import unittest
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
-from dispatch_sdk.bridge import Bridge, Entity, Reading
+from dispatch_sdk.bridge import Bridge, Entity, Reading, SolarReading
 
 
 class BridgeTest(unittest.TestCase):
+    def test_solar_data_bounds(self):
+        self.assertEqual(SolarReading("123456789012", 15, 500, 120, 5000, 2, 2).payload()["watts"], 500)
+        for reading in (
+            SolarReading("123456789012", 31, 500, 120, 5000, 2, 2),
+            SolarReading("123456789012", 15, 500, 120, 5000, 1, 2),
+            SolarReading("12345678901x", 15, 500, 120, 5000, 2, 2),
+        ):
+            with self.assertRaises(ValueError):
+                reading.payload()
+
     def test_wire_contract_and_command_reconciliation(self):
         writes = []
         token = "local-test-token-0000000000000000"
