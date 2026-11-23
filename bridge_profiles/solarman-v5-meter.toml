@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2026 SPECTRE WORKS LLC
+# SPDX-License-Identifier: Apache-2.0
+version = 1
+protocol = "solarman-v5"
+direction = ""
+
+[device]
+host = ""
+port = 8899
+unit = 1
+
+[meter]
+logger_serial = 0
+# Set both from the exact inverter's documented read map.
+function = 0
+register = -1
+# Use zero for a register already expressed in watts.
+exponent = 0

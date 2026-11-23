@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2026 SPECTRE WORKS LLC
+# SPDX-License-Identifier: Apache-2.0
+version = 1
+protocol = "sunspec-tcp"
+# Set "import-positive" or "export-positive" after verifying meter direction.
+direction = ""
+
+[device]
+host = ""
+port = 502
+unit = 1
+
+[meter]
+base = 40000
+serial = ""
+# Use the published model ID for your meter, 201–204 or 211–214.
+model = 203
+# Position among matching model IDs, starting at 1.
+meter_index = 1
