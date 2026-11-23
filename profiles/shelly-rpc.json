@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "family": "shelly-rpc",
+  "fields": {
+    "relayWatts": "apower",
+    "relayEnergyObject": "aenergy",
+    "relayWattHours": "total",
+    "singleGridWatts": "act_power",
+    "threeGridWatts": "total_act_power"
+  }
+}

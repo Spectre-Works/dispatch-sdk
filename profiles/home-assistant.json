@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "family": "home-assistant",
+  "fields": {
+    "battery": "",
+    "temperature": "",
+    "actuator": ""
+  }
+}

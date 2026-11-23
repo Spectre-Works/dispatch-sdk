@@ -1,0 +1,334 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DISPATCH integration profile v1",
+  "$comment": "Use the SDK validator for cross-field rules and the 1536-byte upload limit.",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "version",
+        "family",
+        "fields"
+      ],
+      "properties": {
+        "version": {
+          "type": "integer",
+          "const": 1
+        },
+        "family": {
+          "const": "shelly-gen1"
+        },
+        "fields": {
+          "type": "object",
+          "required": [
+            "models"
+          ],
+          "properties": {
+            "models": {
+              "type": "array",
+              "minItems": 7,
+              "maxItems": 11,
+              "items": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "prefixItems": [
+                  {
+                    "type": "string",
+                    "pattern": "^[A-Z0-9-]{1,11}$"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^shelly[a-z0-9-]{1,11}-$"
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4
+                  }
+                ]
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "version",
+        "family",
+        "fields"
+      ],
+      "properties": {
+        "version": {
+          "type": "integer",
+          "const": 1
+        },
+        "family": {
+          "const": "shelly-rpc"
+        },
+        "fields": {
+          "type": "object",
+          "required": [
+            "relayWatts",
+            "relayEnergyObject",
+            "relayWattHours",
+            "singleGridWatts",
+            "threeGridWatts"
+          ],
+          "properties": {
+            "relayWatts": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            },
+            "relayEnergyObject": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            },
+            "relayWattHours": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            },
+            "singleGridWatts": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            },
+            "threeGridWatts": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "version",
+        "family",
+        "fields"
+      ],
+      "properties": {
+        "version": {
+          "type": "integer",
+          "const": 1
+        },
+        "family": {
+          "const": "tasmota"
+        },
+        "fields": {
+          "type": "object",
+          "required": [
+            "watts",
+            "kilowattHours"
+          ],
+          "properties": {
+            "watts": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            },
+            "kilowattHours": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "version",
+        "family",
+        "fields"
+      ],
+      "properties": {
+        "version": {
+          "type": "integer",
+          "const": 1
+        },
+        "family": {
+          "const": "victron-grid"
+        },
+        "fields": {
+          "type": "object",
+          "required": [
+            "firstRegister",
+            "wordOrder"
+          ],
+          "properties": {
+            "firstRegister": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65530
+            },
+            "wordOrder": {
+              "enum": [
+                "high-first",
+                "low-first"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "version",
+        "family",
+        "fields"
+      ],
+      "properties": {
+        "version": {
+          "type": "integer",
+          "const": 1
+        },
+        "family": {
+          "const": "fronius"
+        },
+        "fields": {
+          "type": "object",
+          "required": [
+            "gridWatts",
+            "solarWatts"
+          ],
+          "properties": {
+            "gridWatts": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            },
+            "solarWatts": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "version",
+        "family",
+        "fields"
+      ],
+      "properties": {
+        "version": {
+          "type": "integer",
+          "const": 1
+        },
+        "family": {
+          "const": "cgminer"
+        },
+        "fields": {
+          "type": "object",
+          "required": [
+            "rate5s",
+            "rate20s",
+            "rateAverage",
+            "accepted",
+            "elapsed"
+          ],
+          "properties": {
+            "rate5s": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            },
+            "rate20s": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            },
+            "rateAverage": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            },
+            "accepted": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            },
+            "elapsed": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_ -]{1,23}$"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "version",
+        "family",
+        "fields"
+      ],
+      "properties": {
+        "version": {
+          "type": "integer",
+          "const": 1
+        },
+        "family": {
+          "const": "home-assistant"
+        },
+        "fields": {
+          "type": "object",
+          "required": [
+            "battery",
+            "temperature",
+            "actuator"
+          ],
+          "properties": {
+            "battery": {
+              "anyOf": [
+                {
+                  "const": ""
+                },
+                {
+                  "type": "string",
+                  "pattern": "^sensor\\.[a-z0-9_]{1,31}$"
+                }
+              ]
+            },
+            "temperature": {
+              "anyOf": [
+                {
+                  "const": ""
+                },
+                {
+                  "type": "string",
+                  "pattern": "^sensor\\.[a-z0-9_]{1,31}$"
+                }
+              ]
+            },
+            "actuator": {
+              "anyOf": [
+                {
+                  "const": ""
+                },
+                {
+                  "type": "string",
+                  "pattern": "^(?:number|select|button)\\.[a-z0-9_]{1,31}$"
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "family": "fronius",
+  "fields": {
+    "gridWatts": "P_Grid",
+    "solarWatts": "P_PV"
+  }
+}

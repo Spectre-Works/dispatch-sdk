@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "family": "cgminer",
+  "fields": {
+    "rate5s": "MHS 5s",
+    "rate20s": "MHS 20s",
+    "rateAverage": "MHS av",
+    "accepted": "Accepted",
+    "elapsed": "Elapsed"
+  }
+}

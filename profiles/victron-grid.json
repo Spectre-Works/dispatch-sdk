@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "family": "victron-grid",
+  "fields": {
+    "firstRegister": 908,
+    "wordOrder": "high-first"
+  }
+}

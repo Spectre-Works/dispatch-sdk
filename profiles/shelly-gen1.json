@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "family": "shelly-gen1",
+  "fields": {
+    "models": [
+      [
+        "SHPLG-1",
+        "shellyplug-",
+        1
+      ],
+      [
+        "SHPLG2-1",
+        "shellyplug-",
+        1
+      ],
+      [
+        "SHPLG-S",
+        "shellyplug-s-",
+        1
+      ],
+      [
+        "SHPLG-U1",
+        "shellyplug-u1-",
+        1
+      ],
+      [
+        "SHSW-PM",
+        "shelly1pm-",
+        1
+      ],
+      [
+        "SHSW-25",
+        "shellyswitch25-",
+        2
+      ],
+      [
+        "SHEM-3",
+        "shellyem3-",
+        1
+      ]
+    ]
+  }
+}
